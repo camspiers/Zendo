@@ -17,3 +17,6 @@ eval (LessThan    l r) a b c = (<)  (evalExpr l a b c) (evalExpr r a b c)
 eval (Equal       l r) a b c = (==) (evalExpr l a b c) (evalExpr r a b c)
 eval (And         l r) a b c = (&&) (eval l a b c) (eval r a b c)
 eval (Or          l r) a b c = (||) (eval l a b c) (eval r a b c)
+
+evalFromTuple :: Func -> (Int, Int, Int) -> Bool
+evalFromTuple func (a, b, c) = eval func a b c

@@ -16,6 +16,18 @@ data Func = GreaterThan Expr Expr
           | And Func Func
           | Or Func Func deriving (Eq)
 
+isVal :: Expr -> Bool
+isVal (Val _) = True
+isVal _ = False
+
+isVar :: Expr -> Bool
+isVar (Var _) = True
+isVar _ = False
+
+isMultiply :: Expr -> Bool
+isMultiply (Multiply _ _) = True
+isMultiply _ = False
+
 instance Show VarName where
   show (A) = "a"
   show (B) = "b"

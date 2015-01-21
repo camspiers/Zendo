@@ -48,14 +48,15 @@ cabal-version:       >=1.10
 library
   hs-source-dirs: src
   exposed-modules:
-    Zendo.Zendo
+    Zendo.Functions
     Zendo.Language
     Zendo.Evaluator
     Zendo.Parser
   default-language:    Haskell2010
   build-depends:
     base >=4.7,
-    parsec
+    parsec,
+    random
 
 executable Zendo
   -- .hs or .lhs file containing the Main module.
@@ -68,7 +69,7 @@ executable Zendo
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.7 && <4.8, random
+  build-depends:       base >=4.7 && <4.8, parsec, random
 
   -- Directories containing source files.
   hs-source-dirs: src

@@ -1,4 +1,5 @@
-module Zendo.Functions where
+module Zendo.Functions
+( funcs ) where
 
 import Zendo.Language
 
@@ -34,14 +35,3 @@ funcs = [com l r |
   not (isVal l && isVal r),
   not (isVal l && isVar r),
   l /= r]
-
--- Com (Var) (Var)
--- Com (Val) (Val)
---
--- Com (Var) (Val)
---
--- Com (Op (Var) (Var)) (Var)
--- Com (Op (Var) (Var)) (Val)
---
--- Com (Op (Val) (Val)) (Val)
--- Com (Op (Val) (Val)) (Var)

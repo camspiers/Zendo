@@ -1,10 +1,11 @@
-module Zendo.Parser where
+module Zendo.Parser
+( parseString ) where
 
 import Zendo.Language
 import Text.ParserCombinators.Parsec
 import Text.ParserCombinators.Parsec.Expr
 
-skipSpaces :: Parser a -> Parser a 
+skipSpaces :: Parser a -> Parser a
 skipSpaces parser = do r <- parser
                        _ <- spaces
                        return r

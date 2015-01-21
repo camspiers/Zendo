@@ -1,4 +1,11 @@
-module Zendo.Language where
+module Zendo.Language
+( VarName(..)
+, Expr(..)
+, Func(..)
+, isVal
+, isVar
+, isMultiply
+) where
 
 data VarName = A
              | B

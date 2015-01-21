@@ -1,4 +1,7 @@
-module Zendo.Evaluator where
+module Zendo.Evaluator
+( eval
+, evalFromTuple
+) where
 
 import Zendo.Language
 

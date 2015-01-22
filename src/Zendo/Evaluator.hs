@@ -1,25 +1,23 @@
 module Zendo.Evaluator
 ( eval
-, evalFromTuple
-) where
+, Args ) where
 
 import Zendo.Language
 
-evalExpr :: Expr -> Int -> Int -> Int -> Int
-evalExpr (Var A)        a _ _ = a
-evalExpr (Var B)        _ b _ = b
-evalExpr (Var C)        _ _ c = c
-evalExpr (Val value)    _ _ _ = value
-evalExpr (Plus l r)     a b c = (+) (evalExpr l a b c) (evalExpr r a b c)
-evalExpr (Multiply l r) a b c = (*) (evalExpr l a b c) (evalExpr r a b c)
-evalExpr (Minus l r)    a b c = (-) (evalExpr l a b c) (evalExpr r a b c)
+type Args = (Int, Int, Int)
 
-eval :: Func -> Int -> Int -> Int -> Bool
-eval (GreaterThan l r) a b c = (>)  (evalExpr l a b c) (evalExpr r a b c)
-eval (LessThan    l r) a b c = (<)  (evalExpr l a b c) (evalExpr r a b c)
-eval (Equal       l r) a b c = (==) (evalExpr l a b c) (evalExpr r a b c)
-eval (And         l r) a b c = (&&) (eval l a b c) (eval r a b c)
-eval (Or          l r) a b c = (||) (eval l a b c) (eval r a b c)
+evalExpr :: Expr -> Args -> Int
+evalExpr (Var A)        (a, _, _) = a
+evalExpr (Var B)        (_, b, _) = b
+evalExpr (Var C)        (_, _, c) = c
+evalExpr (Val value)    (_, _, _) = value
+evalExpr (Plus l r)     args = (+) (evalExpr l args) (evalExpr r args)
+evalExpr (Multiply l r) args = (*) (evalExpr l args) (evalExpr r args)
+evalExpr (Minus l r)    args = (-) (evalExpr l args) (evalExpr r args)
 
-evalFromTuple :: Func -> (Int, Int, Int) -> Bool
-evalFromTuple func (a, b, c) = eval func a b c
+eval :: Func -> Args -> Bool
+eval (GreaterThan l r) args = (>)  (evalExpr l args) (evalExpr r args)
+eval (LessThan    l r) args = (<)  (evalExpr l args) (evalExpr r args)
+eval (Equal       l r) args = (==) (evalExpr l args) (evalExpr r args)
+eval (And         l r) args = (&&) (eval l args) (eval r args)
+eval (Or          l r) args = (||) (eval l args) (eval r args)

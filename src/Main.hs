@@ -13,8 +13,8 @@ chooseFunc = do
   i <- randomRIO (0, length funcs - 1)
   return $ funcs !! i
 
-matches :: Func -> [(Int, Int, Int)]
-matches func = [(a, b, c) | a <- [1..100], b <- [1..100], c <- [1..100], eval func a b c]
+matches :: Func -> [Args]
+matches func = [(a, b, c) | a <- [1..100], b <- [1..100], c <- [1..100], eval func (a, b, c)]
 
 main :: IO ()
 main = do
@@ -26,7 +26,7 @@ main = do
     putStrLn $ "Your Score: " ++ show score
     putStrLn "Guess:"
     guess <- getLine
-    print (evalFromTuple func (read ("(" ++ guess ++ ")")))
+    print (eval func (read ("(" ++ guess ++ ")")))
     putStrLn "Guess the function? (Y/n)"
     yesNo <- getLine
     if yesNo == "Y"
